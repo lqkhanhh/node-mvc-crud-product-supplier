@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const supplierController = require('../controllers/supplierController');
+const controller = require('../controllers/supplierController');
 
-router.get('/', supplierController.index);
-router.get('/create', supplierController.create);
-router.post('/store', supplierController.store);
-router.get('/edit/:id', supplierController.edit);
-router.post('/update/:id', supplierController.update);
-router.get('/delete/:id', supplierController.destroy);
+router.get('/', controller.getAll);
+router.get('/new', controller.createForm);
+router.post('/', controller.create);
+router.get('/:id/edit', controller.editForm);
+router.post('/:id', controller.update);
+router.post('/:id/delete', controller.delete);
 
 module.exports = router;

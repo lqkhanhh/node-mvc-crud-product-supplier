@@ -1,6 +1,7 @@
 {
   "name": "crud-supplier-product",
   "version": "1.0.0",
+  "description": "CRUD Supplier and Product with Node.js, Express, MongoDB, Mongoose, EJS, Bootstrap, Swagger",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -8,10 +9,13 @@
   },
   "dependencies": {
     "body-parser": "^1.20.2",
-    "dotenv": "^17.2.2",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
-    "mongoose": "^8.3.4"
+    "method-override": "^3.0.0",
+    "mongoose": "^8.3.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"

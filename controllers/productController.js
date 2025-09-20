@@ -1,22 +1,22 @@
 const Product = require('../models/Product');
 const Supplier = require('../models/Supplier');
 
-exports.index = async (req, res) => {
+exports.getAll = async (req, res) => {
   const products = await Product.find().populate('supplierId');
   res.render('products/index', { products });
 };
 
-exports.create = async (req, res) => {
+exports.createForm = async (req, res) => {
   const suppliers = await Supplier.find();
-  res.render('products/create', { suppliers });
+  res.render('products/new', { suppliers });
 };
 
-exports.store = async (req, res) => {
+exports.create = async (req, res) => {
   await Product.create(req.body);
   res.redirect('/products');
 };
 
-exports.edit = async (req, res) => {
+exports.editForm = async (req, res) => {
   const product = await Product.findById(req.params.id);
   const suppliers = await Supplier.find();
   res.render('products/edit', { product, suppliers });
@@ -27,7 +27,7 @@ exports.update = async (req, res) => {
   res.redirect('/products');
 };
 
-exports.destroy = async (req, res) => {
+exports.delete = async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);
   res.redirect('/products');
 };

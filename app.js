@@ -1,32 +1,41 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const supplierRoutes = require('./routes/supplierRoutes');
+const productRoutes = require('./routes/productRoutes');
+
+// ✅ thêm 2 dòng này
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 dotenv.config();
 
 const app = express();
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
 
-// Kết nối MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB connected"))
-.catch(err => console.error("❌ MongoDB connection error:", err));
+// Swagger config
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: { title: "CRUD API", version: "1.0.0" },
+  },
+  apis: ["./routes/*.js"],
+};
+const swaggerSpec = swaggerJsdoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-// Routes
-app.get('/', (req, res) => {
-  res.send("Hello CRUD Supplier-Product!");
-});
+app.get('/', (req, res) => res.render('index'));
+app.use('/suppliers', supplierRoutes);
+app.use('/products', productRoutes);
 
-// Server listen
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));

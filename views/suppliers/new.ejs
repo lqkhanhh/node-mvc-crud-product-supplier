@@ -1,7 +1,19 @@
+<%- include('../partials/header') %>
 <h2>Add Supplier</h2>
-<form method="POST" action="/suppliers/store">
-  Name: <input type="text" name="name"><br>
-  Address: <input type="text" name="address"><br>
-  Phone: <input type="text" name="phone"><br>
-  <button type="submit">Save</button>
+<form action="/suppliers" method="POST" class="mt-3">
+  <div class="mb-3">
+    <label class="form-label">Name</label>
+    <input type="text" name="name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Address</label>
+    <input type="text" name="address" class="form-control">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Phone</label>
+    <input type="text" name="phone" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-success">Save</button>
+  <a href="/suppliers" class="btn btn-secondary">Cancel</a>
 </form>
+<%- include('../partials/footer') %>
