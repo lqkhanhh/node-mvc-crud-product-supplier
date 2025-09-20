@@ -1,0 +1,19 @@
+<h2>Products</h2>
+<a href="/products/create">+ Add Product</a>
+<table border="1">
+  <tr>
+    <th>Name</th><th>Address</th><th>Phone</th><th>Supplier</th><th>Actions</th>
+  </tr>
+  <% products.forEach(p => { %>
+    <tr>
+      <td><%= p.name %></td>
+      <td><%= p.address %></td>
+      <td><%= p.phone %></td>
+      <td><%= p.supplierId ? p.supplierId.name : '' %></td>
+      <td>
+        <a href="/products/edit/<%= p._id %>">Edit</a> |
+        <a href="/products/delete/<%= p._id %>">Delete</a>
+      </td>
+    </tr>
+  <% }) %>
+</table>

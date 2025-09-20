@@ -1,0 +1,7 @@
+<h2>Edit Supplier</h2>
+<form method="POST" action="/suppliers/update/<%= supplier._id %>">
+  Name: <input type="text" name="name" value="<%= supplier.name %>"><br>
+  Address: <input type="text" name="address" value="<%= supplier.address %>"><br>
+  Phone: <input type="text" name="phone" value="<%= supplier.phone %>"><br>
+  <button type="submit">Update</button>
+</form>
